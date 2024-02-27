@@ -18,6 +18,7 @@ for page_num in range(5):  # Example: iterate through 5 pages
     
 print(all_results)
 
+
 # Now all_results contains all search results from multiple pages
 
 # from serpapi import GoogleSearch
