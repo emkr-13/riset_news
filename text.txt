@@ -1,1 +1,1 @@
-https://www.google.com/search?q=jokowi+::+cnn?&tbs=cdr:1,cd_min:01-02-2024,cd_max:01-02-2024&start=1&tbm=nws
+https://www.google.com/search?q=jokowi+::+cnn&tbs=cdr:1,cd_min:01-02-2024,cd_max:01-02-2024&start=0&tbm=nws
