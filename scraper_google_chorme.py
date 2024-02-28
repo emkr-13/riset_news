@@ -1,3 +1,4 @@
+import json
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -10,10 +11,8 @@ chrome_options.add_argument("--headless")
 # Initialize Chrome webdriver directly with options
 driver = webdriver.Chrome()
 
-query = 'jokowi::cnn'
-links = [] # Inisialisasi list kosong untuk menampung hasil akhir
-# Tentukan jumlah halaman pada pencarian google, setiap halaman berisi 10 tautan
-n_pages = 3
+# Inisialisasi list kosong untuk menampung hasil akhir
+links = []
 
 # Inisialisasi list untuk menyimpan waktu yang dibutuhkan
 times = []
@@ -21,7 +20,9 @@ times = []
 # Inisialisasi variabel untuk menyimpan penggunaan memori
 memory_usage = []
 
-for page in range(n_pages):
+# Melakukan loop hingga tidak ada hasil pencarian lagi
+page = 0
+while True:
     start_time = time.time()  # Catat waktu awal
     # Untuk page == 0, tidak perlu dikurangi 1
     if page == 0:
@@ -37,16 +38,26 @@ for page in range(n_pages):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     search = soup.find_all('div', class_="SoaBEf")
+    if not search:  # Jika tidak ada hasil, hentikan loop
+        break
+    
     for h in search:
         links.append(h.a.get('href'))
         
-    end_time = time.time()  # Catat waktu akhir
-    times.append(end_time - start_time)  # Hitung waktu yang dibutuhkan
-    memory_usage.append(psutil.Process().memory_info().rss)  # Hitung penggunaan memori
+    # Catat waktu akhir
+    end_time = time.time()  
+    # Hitung waktu yang dibutuhkan
+    times.append(end_time - start_time)  
+    # Hitung penggunaan memori
+    memory_usage.append(psutil.Process().memory_info().rss)  
+    
+    page += 1
+
+# Menyimpan links ke dalam file JSON
+with open('chorme.json', 'w') as f:
+    json.dump(links, f)
 
 print("Links:", len(links))
-print("Times:", times)
-print("Memory Usage:", memory_usage)
 
 # Menghitung total waktu yang dibutuhkan dan penggunaan memori
 total_time = sum(times)
@@ -54,3 +65,6 @@ total_memory = sum(memory_usage)
 
 print("Total Time:", total_time, "seconds")
 print("Total Memory Usage:", total_memory / (1024 * 1024), "MB")  # Mengonversi dari byte ke MB
+
+# Close the webdriver
+driver.quit()
