@@ -1,3 +1,9 @@
 https://www.google.com/search?q=jokowi+::+cnn&tbs=cdr:1,cd_min:01-02-2024,cd_max:01-02-2024&start=0&tbm=nws
 
 https://www.google.com/search?q=jokowi+::+cnnindonesia.com&tbs=cdr:1,cd_min:01-02-2024,cd_max:01-02-2024&start=0&tbm=nws
+
+
+### RSS News Google 
+https://news.google.com/rss/search?q=ganjar%20%3A%3A%20kompas.com%20after%3A2024-01-03%20before%3A2024-01-03&hl=en-US&gl=US&ceid=US%3Aen
+
+https://news.google.com/rss/search?q=ganjar%20%3A%3A%20kompas.com%20after%3A2024-01-03%20before%3A2024-01-03&hl=en-US&gl=US&ceid=US%3Aen
