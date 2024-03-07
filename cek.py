@@ -6,16 +6,25 @@ url = 'https://news.google.com/rss/articles/CBMic2h0dHBzOi8vd3d3LmNubmluZG9uZXNp
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
-# Cari skrip yang mengandung 'CommentComponent'
-comment_script = soup.find('script', string=re.compile(r'CommentComponent'))
+# Cari tag <link> dengan atribut rel="canonical"
+canonical_link = soup.find('link', rel='canonical')
 
-# Jika skrip ditemukan, ekstrak URL-nya
-if comment_script:
-    match = re.search(r"url\s*:\s*'([^']*)'", comment_script.string)
-    if match:
-        comment_url = match.group(1)
-        print("URL dari CSS:", comment_url)
-    else:
-        print("URL tidak ditemukan dalam script.")
+# Jika ditemukan, ambil URL-nya
+if canonical_link:
+    canonical_url = canonical_link.get('href')
+    print("Canonical URL:", canonical_url)
 else:
-    print("Script tidak ditemukan dalam halaman.")
+    print("Canonical URL tidak ditemukan.")
+# # Cari skrip yang mengandung 'CommentComponent'
+# comment_script = soup.find('script', string=re.compile(r'CommentComponent'))
+
+# # Jika skrip ditemukan, ekstrak URL-nya
+# if comment_script:
+#     match = re.search(r"url\s*:\s*'([^']*)'", comment_script.string)
+#     if match:
+#         comment_url = match.group(1)
+#         print("URL dari CSS:", comment_url)
+#     else:
+#         print("URL tidak ditemukan dalam script.")
+# else:
+#     print("Script tidak ditemukan dalam halaman.")
