@@ -1,0 +1,10 @@
+from selenium import webdriver
+import time
+from urllib.parse import quote, unquote
+url='https://news.google.com/rss/articles/CBMic2h0dHBzOi8vd3d3LmNubmluZG9uZXNpYS5jb20vdGVrbm9sb2dpLzIwMjQwMjA1MTYzNDA5LTE5Mi0xMDU4OTEyL3Jpc2V0LWFuaWVzLXVuZ2d1bC10aXBpcy1kaS14LXByYWJvd28tcmFqYS10aWt0b2vSAXdodHRwczovL3d3dy5jbm5pbmRvbmVzaWEuY29tL3Rla25vbG9naS8yMDI0MDIwNTE2MzQwOS0xOTItMTA1ODkxMi9yaXNldC1hbmllcy11bmdndWwtdGlwaXMtZGkteC1wcmFib3dvLXJhamEtdGlrdG9rL2FtcA?oc=5'
+
+driver = webdriver.Chrome()
+driver.get(url)
+time.sleep(3)
+response_url = unquote(driver.current_url) 
+print(response_url)
